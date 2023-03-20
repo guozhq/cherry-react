@@ -5,6 +5,6 @@ cd dist
 git init
 git add .
 git commit -m deploy
-git remote add origin git@github.com:guozhq/cherry-react.git
+git remote add origin git@github.com:guozhq/cherry-react-preview.git
 git push -f origin main:main
 cd -
