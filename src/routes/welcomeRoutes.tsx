@@ -1,13 +1,16 @@
-import { NavLink } from 'react-router-dom'
 import { WelcomeLayout } from '../layouts/WelcomeLayout'
+import { Welcome1 } from '../pages/Welcome1'
+import { Welcome2 } from '../pages/Welcome2'
+import { Welcome3 } from '../pages/Welcome3'
+import { Welcome4 } from '../pages/Welcome4'
 
 export const welcomeRoutes = {
   path: 'welcome',
   element: <WelcomeLayout />,
   children: [
-    { path: '1', element: <div>1<NavLink to="/welcome/2">下一页</NavLink></div> },
-    { path: '2', element: <div>2<NavLink to="/welcome/3">下一页</NavLink></div> },
-    { path: '3', element: <div>3<NavLink to="/welcome/4">下一页</NavLink></div> },
-    { path: '4', element: <div>4<NavLink to="/welcome/xxx">下一页</NavLink></div> }
+    { path: '1', element: <Welcome1 /> },
+    { path: '2', element: <Welcome2 /> },
+    { path: '3', element: <Welcome3 /> },
+    { path: '4', element: <Welcome4 /> }
   ]
 }
