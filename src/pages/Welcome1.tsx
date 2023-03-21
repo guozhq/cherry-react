@@ -1,9 +1,11 @@
-import { NavLink } from 'react-router-dom'
-
+import pot from '../assets/images/pot.svg'
 export const Welcome1: React.FC = () => {
   return (
     <div>
-      <h1 b-1>1</h1>
-      <NavLink to="/welcome/2">下一页</NavLink>
+      <img src={pot} />
+      <h2>
+        会挣钱 <br/>
+        还要会省钱
+      </h2>
     </div>)
 }
