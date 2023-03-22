@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web'
 import type { ReactNode } from 'react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import logo from '../assets/images/mangosteen.svg'
 
@@ -15,6 +15,7 @@ export const WelcomeLayout: React.FC = () => {
   const map = useRef<Record<string, ReactNode>>({})
   const location = useLocation()
   const outlet = useOutlet()
+  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
   map.current[location.pathname] = outlet
   const transitions = useTransition(location.pathname, {
     from: {
@@ -22,20 +23,28 @@ export const WelcomeLayout: React.FC = () => {
         ? 'translateX(0%)'
         : 'translateX(100%)'
     },
-    enter: { transform: 'translateX(0)' },
-    leave: { transform: 'translateX(-100%' },
-    config: { duration: 500 },
+    enter: { transform: 'translateX(0%)' },
+    leave: { transform: 'translateX(-100%)' },
+    config: { duration: 1000 },
+    onStart: () => {
+      setExtraStyle({ position: 'absolute' })
+    },
+    onRest: () => {
+      setExtraStyle({ position: 'relative' })
+    }
   })
   return (
     <div className="bg-#5e34bf" h-screen flex flex-col items-stretch pb-16px>
       <header shrink-0 text-center>
-        <img src={logo} w-64px/>
+        <img src={logo} w-64px h-69px/>
         <h1 text='#D4D4EE' text-32px>山竹记账</h1>
       </header>
-      <div shrink-1 grow-1 m-6px text-center>
+      <div shrink-1 grow-1 text-center relative>
         {transitions((style, pathname) =>
-          <animated.div key={pathname} style={style} bg-white w-full h-full rounded-8px flex justify-center items-center>
+          <animated.div key={pathname} style={{ ...extraStyle, ...style }} w-full h-full flex p-16px>
+            <div grow-1 bg-white rounded-8px flex justify-center items-center >
             {map.current[pathname]}
+            </div>
           </animated.div>
         )}
       </div>

@@ -4,5 +4,6 @@ declare module 'react' {
     flex?: boolean
     text?: string
     grid?: boolean
+    relative?: boolean
   }
 }
