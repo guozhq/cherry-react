@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import logo from '../assets/images/mangosteen.svg'
 
-const linkMap: { [key: string]: string } = {
+const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
   '/welcome/2': '/welcome/3',
   '/welcome/3': '/welcome/4',
@@ -15,7 +15,7 @@ export const WelcomeLayout: React.FC = () => {
   const map = useRef<Record<string, ReactNode>>({})
   const location = useLocation()
   const outlet = useOutlet()
-  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
+  const [extraStyle, setExtraStyle] = useState<{ position: 'relative' | 'absolute' }>({ position: 'relative' })
   map.current[location.pathname] = outlet
   const transitions = useTransition(location.pathname, {
     from: {
@@ -25,7 +25,7 @@ export const WelcomeLayout: React.FC = () => {
     },
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
-    config: { duration: 1000 },
+    config: { duration: 500 },
     onStart: () => {
       setExtraStyle({ position: 'absolute' })
     },
