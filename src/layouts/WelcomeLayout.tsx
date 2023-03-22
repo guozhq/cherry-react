@@ -1,8 +1,9 @@
 import { animated, useTransition } from '@react-spring/web'
 import type { ReactNode } from 'react'
-import { useRef, useState } from 'react'
-import { Link, useLocation, useOutlet } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate, useOutlet } from 'react-router-dom'
 import logo from '../assets/images/mangosteen.svg'
+import { useSwipe } from '../hooks/useSwipe'
 
 const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
@@ -12,6 +13,7 @@ const linkMap: Record<string, string> = {
 }
 
 export const WelcomeLayout: React.FC = () => {
+  const animating = useRef(false)
   const map = useRef<Record<string, ReactNode>>({})
   const location = useLocation()
   const outlet = useOutlet()
@@ -30,16 +32,27 @@ export const WelcomeLayout: React.FC = () => {
       setExtraStyle({ position: 'absolute' })
     },
     onRest: () => {
+      animating.current = false
       setExtraStyle({ position: 'relative' })
     }
   })
+  const main = useRef<HTMLElement>(null)
+  const { direction } = useSwipe(main, { onTouchStart: e => e.preventDefault() })
+  const nav = useNavigate()
+  useEffect(() => {
+    if (direction === 'left') {
+      if (animating.current) { return }
+      animating.current = true
+      nav(linkMap[location.pathname])
+    }
+  }, [direction, location.pathname, linkMap])
   return (
     <div className="bg-#5e34bf" h-screen flex flex-col items-stretch pb-16px>
       <header shrink-0 text-center>
         <img src={logo} w-64px h-69px/>
         <h1 text='#D4D4EE' text-32px>山竹记账</h1>
       </header>
-      <div shrink-1 grow-1 text-center relative>
+      <main shrink-1 grow-1 text-center relative ref={main}>
         {transitions((style, pathname) =>
           <animated.div key={pathname} style={{ ...style, ...extraStyle }} w-full h-full flex p-16px>
             <div grow-1 bg-white rounded-8px flex justify-center items-center >
@@ -47,7 +60,7 @@ export const WelcomeLayout: React.FC = () => {
             </div>
           </animated.div>
         )}
-      </div>
+      </main>
       <footer shrink-0 text-center text-24px text-white grid grid-cols-3 grid-rows-1>
         <Link style={{ gridArea: '1 / 2 / 2 / 3' }} to={linkMap[location.pathname]}>下一页</Link>
         <Link style={{ gridArea: '1 / 3 / 2 / 4' }} to='/welcome/xxx'>跳过</Link>
