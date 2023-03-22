@@ -41,7 +41,7 @@ export const WelcomeLayout: React.FC = () => {
       </header>
       <div shrink-1 grow-1 text-center relative>
         {transitions((style, pathname) =>
-          <animated.div key={pathname} style={{ ...extraStyle, ...style }} w-full h-full flex p-16px>
+          <animated.div key={pathname} style={{ ...style, ...extraStyle }} w-full h-full flex p-16px>
             <div grow-1 bg-white rounded-8px flex justify-center items-center >
             {map.current[pathname]}
             </div>
