@@ -32,9 +32,9 @@ export const WelcomeLayout: React.FC = () => {
         <img src={logo} w-64px/>
         <h1 text='#D4D4EE' text-32px>山竹记账</h1>
       </header>
-      <div shrink-1 grow-1 bg-white m-6px rounded-8px flex justify-center items-center text-center>
+      <div shrink-1 grow-1 m-6px text-center>
         {transitions((style, pathname) =>
-          <animated.div key={pathname} style={style}>
+          <animated.div key={pathname} style={style} bg-white w-full h-full rounded-8px flex justify-center items-center>
             {map.current[pathname]}
           </animated.div>
         )}
