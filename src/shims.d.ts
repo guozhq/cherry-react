@@ -5,5 +5,8 @@ declare module 'react' {
     text?: string
     grid?: boolean
     relative?: boolean
+    bg?: string
+    rounded?: string
+    fixed?: boolean 
   }
 }
