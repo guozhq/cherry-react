@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
      (await ajax.get<Resources<Item>>(path)).data)
 
   if (isLoadingMe || isLoadingItems) {
-    return <Loading />
+    return <Loading className="h-screen" message='正在加载页面，请稍等'/>
   }
   if (itemsData?.resources[0]) {
     return <Navigate to="/items"/>
