@@ -9,5 +9,6 @@ declare module 'react' {
     rounded?: string
     fixed?: boolean
     b?: string
+    z?: string
   }
 }
