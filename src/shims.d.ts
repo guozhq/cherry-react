@@ -10,5 +10,6 @@ declare module 'react' {
     fixed?: boolean
     b?: string
     z?: string
+    block?: boolean
   }
 }
