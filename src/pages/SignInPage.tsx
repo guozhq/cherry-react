@@ -24,7 +24,6 @@ export const SignInPage: React.FC = () => {
         <h1 text-32px text="#7878FF" font-bold>山竹记账</h1>
       </div>
       <form j-form onSubmit={onSubmit}>
-      <div b-1 b-red>{JSON.stringify(data)}</div>
         <div>
           <span j-form-label>邮箱地址{ error.email?.[0] && <span>{error.email[0]}</span>}</span>
           <input j-input-text type="text"
