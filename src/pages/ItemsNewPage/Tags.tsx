@@ -4,7 +4,6 @@ type Props = {
   kind: Item['kind']
 }
 export const Tags: React.FC<Props> = (props) => {
-  const { kind } = props
   const tags = Array.from({ length: 120 })
   return (<div>
     <ol grid grid-cols="[repeat(auto-fit,48px)]" justify-center
