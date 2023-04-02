@@ -15,5 +15,6 @@ declare module 'react' {
     h?: string
     absolute?: boolean
     top?:string
+    truncate?: boolean
   }
 }
