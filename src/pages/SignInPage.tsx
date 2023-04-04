@@ -13,12 +13,12 @@ export const SignInPage: React.FC = () => {
   const nav = useNavigate()
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    const error = validate(data, [
+    const newError = validate(data, [
       { key: 'email', type: 'required', message: '请输入邮箱' },
       { key: 'code', type: 'required', message: '请输入验证码' },
     ])
-    setError(error)
-    if (!hasError(error)) {
+    setError(newError)
+    if (!hasError(newError)) {
       ajax.post('/api/v1/session', data)
       nav('/home')
     }
