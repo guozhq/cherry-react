@@ -34,7 +34,7 @@ export const SignInPage: React.FC = () => {
       <form j-form onSubmit={onSubmit}>
         <div>
         <Input label='邮箱地址' placeholder='请输入邮箱，然后点击发送验证码'
-          value={data.email} onChange={value => setData({ email: value })}
+          value={data.email} onChange={email => setData({ email })}
           error={error.email?.[0]} />
         </div>
         <Input label='验证码' type="sms_code" placeholder='六位数字' value={data.code}
