@@ -11,8 +11,24 @@ export const StatisticsPage: React.FC = () => {
   const items = [
     { date: '2000-01-01', value: 5000 },
     { date: '2000-01-02', value: 4000 },
-    { date: '2000-01-31', value: 500 },
-  ].map(item => ({ x: item.date, y: item.value }))
+    { date: '2000-01-03', value: 5000 },
+    { date: '2000-01-04', value: 4000 },
+    { date: '2000-01-05', value: 5000 },
+    { date: '2000-01-06', value: 4000 },
+    { date: '2000-01-07', value: 5000 },
+    { date: '2000-01-08', value: 4000 },
+    { date: '2000-01-09', value: 5000 },
+    { date: '2000-01-10', value: 4000 },
+    { date: '2000-01-11', value: 5000 },
+    { date: '2000-01-12', value: 4000 },
+    { date: '2000-01-13', value: 5000 },
+    { date: '2000-01-14', value: 4000 },
+    { date: '2000-01-15', value: 5000 },
+    { date: '2000-01-16', value: 4000 },
+    { date: '2000-01-17', value: 5000 },
+    { date: '2000-01-18', value: 4000 },
+    { date: '2000-01-31', value: 5000 },
+  ].map(item => ({ x: item.date, y: item.value / 100 }))
   return (
     <div>
       <Gradient>
