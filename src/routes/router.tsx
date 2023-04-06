@@ -11,6 +11,7 @@ import { Welcome2 } from '../pages/Welcome2'
 import { Welcome3 } from '../pages/Welcome3'
 import { Welcome4 } from '../pages/Welcome4'
 import { TagsEditPage } from '../pages/TagsEditPage'
+import { StatisticsPage } from '../pages/StatisticsPage'
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
   { path: '/tags/new', element: <TagsNewPage /> },
   { path: '/tags/:id', element: <TagsEditPage /> },
   { path: '/sign_in', element: <SignInPage /> },
+  { path: '/statistics', element: <StatisticsPage /> },
   { path: '/chart', element: <div>图表</div> },
   { path: '/export', element: <div>敬请期待</div> },
   { path: '/tags', element: <div>标签</div> },
