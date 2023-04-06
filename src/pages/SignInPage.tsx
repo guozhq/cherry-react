@@ -1,3 +1,4 @@
+import axios from 'axios'
 import type { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Gradient } from '../components/Gradient'
@@ -23,7 +24,7 @@ export const SignInPage: React.FC = () => {
       nav('/home')
     }
   }
-  const onClickCode = () => {
+  const onClickCode = async () => {
     const newError = validate({ email: data.email }, [
       { key: 'email', type: 'pattern', regex: /^.+@.+$/, message: '邮箱地址格式不正确' }
     ])
@@ -32,7 +33,10 @@ export const SignInPage: React.FC = () => {
       console.log('有错')
     } else {
       console.log('没错')
-      // 请求
+      const response = await axios.post('http://121.196.236.94:8080/api/v1/validation_codes', {
+        email: data.email
+      })
+      console.log(response)
     }
   }
   return (<div>
