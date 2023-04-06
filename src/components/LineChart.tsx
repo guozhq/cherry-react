@@ -60,6 +60,6 @@ export const LineChart: React.FC<Props> = (props) => {
     myChart.setOption(option)
   })
   return (
-    <div ref={div} h-400px className={className}></div>
+    <div ref={div} className={className}></div>
   )
 }
