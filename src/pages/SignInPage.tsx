@@ -1,6 +1,7 @@
 import axios from 'axios'
 import type { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
+import type { AxiosError } from 'axios'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
 import { Input } from '../components/Input'
@@ -8,11 +9,16 @@ import { TopNav } from '../components/TopNav'
 import { ajax } from '../lib/ajax'
 import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignInStore'
+import type { FormError } from '../lib/validate'
 
 export const SignInPage: React.FC = () => {
   const { data, error, setData, setError } = useSignInStore()
   const nav = useNavigate()
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmitError = (err: AxiosError<{ errors: FormError<typeof data> }>) => {
+    setError(err.response?.data?.errors ?? {})
+    throw error
+  }
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     const newError = validate(data, [
       { key: 'email', type: 'required', message: '请输入邮箱' },
@@ -20,7 +26,11 @@ export const SignInPage: React.FC = () => {
     ])
     setError(newError)
     if (!hasError(newError)) {
-      ajax.post('/api/v1/session', data)
+      const response = await ajax.post<{ jwt: string }>('http://121.196.236.94:8080/api/v1/session', data)
+        .catch(onSubmitError)
+      const jwt = response.data.jwt
+      console.log('jwt', jwt)
+      localStorage.setItem('jwt', jwt)
       nav('/home')
     }
   }
