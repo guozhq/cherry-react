@@ -1,10 +1,25 @@
 import useSWR from 'swr'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+import type { AxiosError } from 'axios'
 import pot from '../assets/images/pot.svg'
 import { ajax } from '../lib/ajax'
 import { AddItemFloatButton } from '../components/AddItemFloatButton'
 import { Loading } from '../components/Loading'
-export const Home: React.FC = () => {
+import { useTitle } from '../hooks/useTitle'
+interface Props {
+  title?: string
+}
+export const Home: React.FC<Props> = (props) => {
+  useTitle(props.title)
+  const nav = useNavigate()
+  const onHttpError = (error: AxiosError) => {
+    if (error.response) {
+      if (error.response.status === 401) {
+        nav('/sign_in')
+      }
+    }
+    throw error
+  }
   const { data: meData, isLoading: isLoadingMe }
   = useSWR('/api/v1/me', async path => (
     await ajax.get<Resource<User>>(path)).data.resource
