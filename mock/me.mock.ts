@@ -6,6 +6,10 @@ export const meMock: MockMethod = {
   timeout: 100,
   statusCode: 401,
   response: () => {
-    return ''
+    return {
+      resource: {
+        id: 1
+      }
+    }
   },
 }
