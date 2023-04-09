@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { Navigate } from 'react-router-dom'
-import p from '../assets/images/pig.svg'
+import p from '../assets/images/pot.svg'
 import { useAjax } from '../lib/ajax'
 import { useTitle } from '../hooks/useTitle'
 import { Loading } from '../components/Loading'
