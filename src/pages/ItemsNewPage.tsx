@@ -8,7 +8,7 @@ import s from './ItemsNewPage.module.scss'
 import { DateAndAmount } from './ItemsNewPage/DateAndAmount'
 import { Tags } from './ItemsNewPage/Tags'
 
-export const ItemsNewPages: React.FC = () => {
+export const ItemsNewPage: React.FC = () => {
   const tabItems: { key: Item['kind']; text: string; element: ReactNode }[]
     = [{ key: 'expenses', text: '支出', element: <Tags kind="expenses" /> },
       { key: 'income', text: '收入', element: <Tags kind="income" /> }]
