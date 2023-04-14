@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { useState } from 'react'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
 import { Tabs } from '../components/Tabs'
@@ -10,11 +9,22 @@ import { DateAndAmount } from './ItemsNewPage/DateAndAmount'
 import { Tags } from './ItemsNewPage/Tags'
 
 export const ItemsNewPage: React.FC = () => {
-  const tabItems: { key: Item['kind']; text: string; element: ReactNode }[]
-    = [{ key: 'expenses', text: '支出', element: <Tags kind="expenses" /> },
-      { key: 'income', text: '收入', element: <Tags kind="income" /> }]
-  const [tabItem, setTabItem] = useState<Item['kind']>('expenses')
   const { data, error, setData, setError } = useCreateItemStore()
+  const tabItems: { key: Item['kind']; text: string; element: ReactNode }[]
+    = [
+      { // JetBrains Mono
+        key: 'expenses',
+        text: '支出',
+        element:
+          <Tags kind="expenses" value={data.tag_ids} onChange={(ids) => setData({ tag_ids: ids })} />
+      },
+      {
+        key: 'income',
+        text: '收入',
+        element:
+          <Tags kind="income" value={data.tag_ids} onChange={(ids) => setData({ tag_ids: ids })} />
+      }
+    ]
   return (
     <div className={s.wrapper} h-screen flex flex-col>
       <Gradient className="grow-0 shrink-0">
